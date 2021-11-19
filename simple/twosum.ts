@@ -4,8 +4,6 @@ Given an array of integers nums and an integer target, return indices of the two
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 */
 
-import { isNamedExportBindings } from "typescript"
-
 // Signature
 // Array, number: Array
 
@@ -25,15 +23,15 @@ export default function twoSums(num_list: number[], target: number): number[] {
     check all array combinations and return their indices if their value is equal to target
 };
 */
-function toEntries(a: number[]) {
-    return a.map((value, index) => [index, value] as const);
+function mapIndexToElement(a: number[]) {
+    return a.map((element, index) => [index, element]);
 }
 
 
 export default function twoSums(numArray: number[], target: number): number[] {
-    for (const [index, value] of toEntries(numArray)) {
+    for (const [index, value] of mapIndexToElement(numArray)) {
         const nextArray = numArray.slice(index + 1);
-        for (const [nextIdx, nextVal] of toEntries(nextArray)) {
+        for (const [nextIdx, nextVal] of mapIndexToElement(nextArray)) {
             if ((value + nextVal) === target) {
                 return [index, nextIdx + index + 1]
             }
